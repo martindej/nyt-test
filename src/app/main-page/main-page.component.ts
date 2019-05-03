@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable, Subscription, Subject } from 'rxjs';
 
 import { ArticleService } from '../article.service';
 
@@ -12,8 +13,17 @@ export class MainPageComponent implements OnInit {
   allArticles;
   search: string;
   offset: number = 0;
+  order:string = "newest";
 
-  constructor(private articleService: ArticleService) { }
+  private subscriptionAllArticles: Subscription;
+
+  constructor(private articleService: ArticleService) {
+
+    this.allArticles = articleService.listArticle;
+    this.subscriptionAllArticles = articleService.listArticleChange.subscribe((value) => {
+      this.allArticles = value;
+    });
+  }
 
   ngOnInit() {
     this.getAllArticles();
@@ -25,26 +35,18 @@ export class MainPageComponent implements OnInit {
     this.getAllArticles();
   }
 
+  changeOrder(order: string) {
+    this.order = order;
+    this.getAllArticles();
+  }
+
   displayMore() {
     this.offset = this.offset + 1;
     this.getAllArticles();
   }
 
   getAllArticles() {
-    this.articleService.getAllArticles(this.search, this.offset)
-      .subscribe(
-        data => {
-          console.log(data);
-          if(this.offset == 0) {
-            this.allArticles = data.response.docs;
-          }
-          else {
-            for(let i in data.response.docs) {
-              this.allArticles.push(data.response.docs[i])
-            }
-          }
-        }
-      )
+    this.articleService.getAllArticles(this.search, this.offset, this.order);
   }
 
 }

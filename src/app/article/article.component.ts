@@ -14,8 +14,7 @@ export class ArticleComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   parseImage(article: Article): string {
 

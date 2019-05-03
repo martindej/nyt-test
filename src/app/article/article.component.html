@@ -1,4 +1,4 @@
-<mat-card class="article-card" *ngIf="article" routerLink="/detailsPage">
+<mat-card class="article-card" *ngIf="article" routerLink="/detailsPage/{{article._id}}">
   <mat-card-header>
     <!-- <div mat-card-avatar class="example-header-image"></div> -->
     <mat-card-subtitle>{{article.section_name}}</mat-card-subtitle>

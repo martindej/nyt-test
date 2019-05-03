@@ -1,3 +1,24 @@
-<p>
-  details-page works!
-</p>
+<div class="container marginTop">
+  <div class="row">
+    <button mat-stroked-button color="primary" routerLink="/mainPage">Back to main list</button>
+  </div>
+  <div class="row">
+    <mat-card class="article-card" *ngIf="article">
+      <mat-card-header>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-subtitle>{{article.section_name}}</mat-card-subtitle>
+        <mat-card-title>{{article.headline?.main}}</mat-card-title>
+        <mat-card-subtitle>{{article.pub_date  | date:'medium'}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [style.opacity]="1" src="{{parseImage(article)}}" alt="{{article.title}}">
+      <mat-card-content>
+        <p>
+          {{article.abstract}}
+        </p>
+      </mat-card-content>
+      <!-- <mat-card-footer>
+        <span class="article-type">{{article.section_name}}</span>
+      </mat-card-footer> -->
+    </mat-card>
+  </div>
+</div>

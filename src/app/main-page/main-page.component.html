@@ -1,9 +1,15 @@
 <div class="container">
   <div class="row">
     <mat-form-field class="form-field">
-      <input #search matInput placeholder="Filter" (keydown.enter)="OnInput(search.value)">
+      <input #search matInput placeholder="Filter" (keyup)="OnInput(search.value)">
     </mat-form-field>
   </div>
+  <div class="row">
+      <mat-button-toggle-group appearance="legacy" aria-label="Font Style">
+        <mat-button-toggle (click)="changeOrder('newest')">newest first</mat-button-toggle>
+        <mat-button-toggle (click)="changeOrder('oldest')">oldest first</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
   <div class="row">
     <app-article class="col-lg-6" *ngFor="let article of allArticles" [article]="article">
     </app-article>

@@ -1,6 +1,8 @@
 import { Image } from './image';
 
 export interface Article {
+  _id: string;
+  web_url: string;
   section_name: string;
   subsection_name: string;
   headline: {};
